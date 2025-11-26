@@ -56,7 +56,7 @@ clean_const.to_csv("scenario_with_params_constant_clean.csv", index=False)
 clean_minus.to_csv("scenario_with_params_minus1percent_clean.csv", index=False)
 clean_plus.to_csv("scenario_with_params_plus1percent_clean.csv", index=False)
 
-print("\n🎉 FICHIERS FINAUX GÉNÉRÉS :")
+print("\n FICHIERS FINAUX GÉNÉRÉS :")
 print("  ✔ scenario_with_params_constant_clean.csv")
 print("  ✔ scenario_with_params_minus1percent_clean.csv")
 print("  ✔ scenario_with_params_plus1percent_clean.csv")
