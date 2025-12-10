@@ -1,29 +1,23 @@
+# -*- coding: utf-8 -*-
 import pandas as pd
 from sklearn.linear_model import LinearRegression
 
-# Charger ton fichier CSV
+# Load CSV file
 df = pd.read_csv("Switzerland_pollution_timeseries_COMPLETE.csv")
 
-# Vérifier les noms de colonnes
-print("Colonnes disponibles :", df.columns.tolist())
-
-# Corriger si besoin (par exemple S02 -> SO2)
-df.rename(columns={"S02": "SO2"}, inplace=True)
-
-# Définir X et y
-polluants = ["O3","NO2","PM10","CO2","CH4","SO2"]
-X = df[polluants]
+# Define predictors (pollutants) and target (NDVI)
+X = df[["O3", "NO2", "PM10", "CO2", "CH4", "SO2"]]
 y = df["NDVI"]
 
-# Créer et entraîner le modèle global
+# Create and train the global model
 model = LinearRegression()
 model.fit(X, y)
 
-# Extraire les coefficients
+# Extract coefficients
 poids = pd.Series(model.coef_, index=X.columns)
 
-# Sauvegarder dans un CSV
+# Save to CSV
 poids.to_csv("poids_globaux.csv", header=["Poids"])
 
-print("Poids globaux calculés et sauvegardés dans 'poids_globaux.csv'")
+print("Global weights calculated and saved in 'poids_globaux.csv'")
 print(poids)
