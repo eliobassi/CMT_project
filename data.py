@@ -158,3 +158,24 @@ df_wide = df_wide[cols]
 out_path = "Switzerland_pollution_timeseries_COMPLETE.csv"
 df_wide.to_csv(out_path, index=False)
 print(f"\nSaved {out_path}")
+
+
+
+# Load the NDVI data
+ndvi_df = pd.read_csv('/mnt/data/NDVI_NO2_timeseries.csv')
+
+# Assuming the NDVI file has columns like "Year", "Region", and "NDVI"
+# Group by "Year" and calculate the mean NDVI for each year
+ndvi_mean_per_year = ndvi_df.groupby("Year")["NDVI"].mean().reset_index()
+
+# Now load your pollution data CSV (already done in your original code)
+pollution_data_path = "Switzerland_pollution_timeseries_COMPLETE.csv"
+pollution_df = pd.read_csv(pollution_data_path)
+
+# Merge the NDVI mean for each year with the pollution data
+final_df = pd.merge(pollution_df, ndvi_mean_per_year, on="Year", how="left")
+
+# Save the final CSV with NDVI data added
+final_df.to_csv("Switzerland_pollution_timeseries_with_NDVI.csv", index=False)
+print(f"\nSaved the updated file as Switzerland_pollution_timeseries_with_NDVI.csv")
+
