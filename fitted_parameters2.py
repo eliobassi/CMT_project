@@ -46,8 +46,8 @@ r_est, K_est, B0_est = popt
 # 3. Calculer r(P) pour chaque année
 # ------------------------------------------------------
 # Ici r_est est le paramètre global ajusté.
-# On définit r(P) = r_est * exp(-P)
-r_values = r_est * np.exp(-P)
+# On définit r(P) = r_est * exp(P)
+r_values = r_est * np.exp(P)
 
 # ------------------------------------------------------
 # 4. Construire le tableau final
