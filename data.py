@@ -160,22 +160,55 @@ df_wide.to_csv(out_path, index=False)
 print(f"\nSaved {out_path}")
 
 
+# ---------------------------------------------------------
+# ADD NATIONAL NDVI (2010–2018) FROM NDVI_NO2_timeseries.csv
+# ---------------------------------------------------------
 
-# Load the NDVI data
-ndvi_df = pd.read_csv('/mnt/data/NDVI_NO2_timeseries.csv')
+print("\nAdding national NDVI averages from NDVI_NO2_timeseries.csv ...")
 
-# Assuming the NDVI file has columns like "Year", "Region", and "NDVI"
-# Group by "Year" and calculate the mean NDVI for each year
-ndvi_mean_per_year = ndvi_df.groupby("Year")["NDVI"].mean().reset_index()
+ndvi_path = os.path.join(data_folder, "NDVI_NO2_timeseries.csv")
+if not os.path.exists(ndvi_path):
+    raise FileNotFoundError("NDVI_NO2_timeseries.csv not found in data/ folder.")
 
-# Now load your pollution data CSV (already done in your original code)
-pollution_data_path = "Switzerland_pollution_timeseries_COMPLETE.csv"
-pollution_df = pd.read_csv(pollution_data_path)
+# Load regional NDVI dataset
+ndvi_df = pd.read_csv(ndvi_path)
 
-# Merge the NDVI mean for each year with the pollution data
-final_df = pd.merge(pollution_df, ndvi_mean_per_year, on="Year", how="left")
+# Keep only years 2010–2018
+ndvi_df = ndvi_df[(ndvi_df["Year"] >= 2010) & (ndvi_df["Year"] <= 2018)]
 
-# Save the final CSV with NDVI data added
-final_df.to_csv("Switzerland_pollution_timeseries_with_NDVI.csv", index=False)
-print(f"\nSaved the updated file as Switzerland_pollution_timeseries_with_NDVI.csv")
+# Compute national NDVI per year
+ndvi_national = (
+    ndvi_df.groupby("Year")["Mean_NDVI"]
+    .mean()
+    .reset_index()
+    .rename(columns={"Mean_NDVI": "NDVI"})
+)
 
+print("National NDVI computed:\n", ndvi_national)
+
+# Merge into df_wide
+df_wide = df_wide.merge(ndvi_national, on="Year", how="left")
+
+
+# ---------------------------------------------------------
+# SAVE **ONLY** THE FINAL CSV (NO TEMPORARY FILES)
+# ---------------------------------------------------------
+final_path = "Switzerland_pollution_timeseries_COMPLETE.csv"
+df_wide.to_csv(final_path, index=False)
+
+print(f"\n✔ FINAL FILE CREATED: {final_path}")
+
+
+# ---------------------------------------------------------
+# REMOVE YEAR 2012
+# ---------------------------------------------------------
+
+df_wide = df_wide[df_wide["Year"] != 2012]
+
+# ---------------------------------------------------------
+# SAVE FINAL CSV
+# ---------------------------------------------------------
+final_path = "Switzerland_pollution_timeseries_COMPLETE.csv"
+df_wide.to_csv(final_path, index=False)
+
+print(f"\n✔ FINAL FILE CREATED (without 2012): {final_path}")
