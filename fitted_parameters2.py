@@ -8,7 +8,7 @@ warnings.filterwarnings("ignore", category=OptimizeWarning)
 # ------------------------------------------------------
 # 1. Load dataset
 # ------------------------------------------------------
-df = pd.read_csv("pollution_each_year.csv")  # doit contenir Year, NDVI, PollutionGlobale
+df = pd.read_csv("pollution_each_year_WITH_NDVI.csv")  # doit contenir Year, NDVI, PollutionGlobale
 df = df.dropna(subset=["NDVI", "PollutionGlobale"])
 
 # ------------------------------------------------------
