@@ -182,9 +182,9 @@ int main(int argc, char **argv) {
     if (argc != 5) {
         fprintf(stderr,
             "Usage: %s <file_up> <file_down> <file_cst> <output_csv>\n"
-            "  file_up   : scenario P +1%%/an (ex: scenario_P_plus1pct_2019-2050.csv)\n"
-            "  file_down : scenario P -1%%/an (ex: scenario_P_minus1pct_2019-2050.csv)\n"
-            "  file_cst  : scenario P constant (ex: scenario_P_constant_2019-2050.csv)\n"
+            "  file_up   : scenario P +1%%/an (ex: scenario_P_up.csv)\n"
+            "  file_down : scenario P -1%%/an (ex: scenario_P_down.csv)\n"
+            "  file_cst  : scenario P constant (ex: scenario_P_constant.csv)\n"
             "  output_csv: fichier de sortie fusionné\n", argv[0]);
         return 1;
     }
