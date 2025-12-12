@@ -235,5 +235,6 @@ int main(void) {
     fclose(out);
     free(NDVI_up); free(NDVI_down); free(NDVI_cst);
 
-    printf("OK : fichier de sortie écrit -> %s\n", FILE    printf("OK : fichier de sortie écrit -> %s\n", FILE_OUT);
+    printf("OK : fichier de sortie écrit -> %s\n", FILE_OUT);
     return 0;
+}
