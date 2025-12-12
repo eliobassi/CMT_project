@@ -58,9 +58,9 @@ for yr, Pi, Bi, ri in zip(years, P, B, r_values):
         "Year": yr,
         "P": Pi,
         "NDVI": Bi,
-        "r_estimated": ri,
-        "B0_estimated": B0_est,
-        "K_estimated": K_est
+        "r0": ri,
+        "B0": B0_est,
+        "K": K_est
     })
 
 results_df = pd.DataFrame(rows)
