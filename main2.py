@@ -7,6 +7,7 @@ import rasterio
 import warnings
 from sklearn.linear_model import LinearRegression
 from scipy.optimize import curve_fit, OptimizeWarning
+import subprocess
 
 # -------------------------
 # SETTINGS
@@ -408,4 +409,13 @@ build_df(P_const).to_csv('scenario_P_constant.csv', index=False)
 build_df(P_minus1).to_csv('scenario_P_down.csv', index=False)
 build_df(P_plus1).to_csv('scenario_P_up.csv', index=False)
 
+
+# -------------------------------
+# Running the C program via subprocess 
+
+# Compile the C program
+subprocess.run(["gcc", "simulate_ndvi.c", "-Wall", "-lm", "-o", "a.out"], check=True)
+
+# Run the compiled C program
+subprocess.run(["./a.out"], check=True)
 
