@@ -87,7 +87,15 @@ Templates for .tex and .odt formats are provided in "docs/". The formatting can 
 
 ### Dependencies
 
-Describe the operating system, programs (MATLAB/Python/C), version numbers, and external packages that need to be installed to run the program. Canonically, it should run on the SIE Linux VDI, but if you require a different configuration (e.g., more updated MATLAB version) you can state it here.
+The project is designed to run on Linux (SIE VDI compatible).
+
+Required software:
+
+- Python 3.11.9 ('lte')
+
+- C compiler (gcc)
+
+All scripts were tested using a Micromamba/Conda environment.
 
 ### Build
 
