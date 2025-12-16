@@ -437,7 +437,7 @@ plt.grid(True, linestyle="--", alpha=0.6)
 plt.legend(fontsize=12)
 
 plt.tight_layout()
-plt.savefig("Results/Ouest_Lausanne_predictions.png")
+plt.savefig("CMT_project/Results/Ouest_Lausanne_predictions.png")
 plt.show()
 
 print(" Plot 'Future NDVI Predictions for Ouest Lausanne' created ")
@@ -495,6 +495,6 @@ plt.grid(True, linestyle="--", alpha=0.5)
 plt.legend(fontsize=12)
 
 plt.tight_layout()
-plt.savefig("Results/NDVI_sensitivity_to_NO2.png")
+plt.savefig("CMT_project/Results/NDVI_sensitivity_to_NO2.png")
 plt.show()
 print(" Plot 'NDVI Sensitivity to NO₂\nlog(r) vs NO₂' created ")
