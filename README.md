@@ -19,7 +19,30 @@ The project combines :
 
 ### Input files
 
-Describe the input files used by the program. (Located in "data/".)
+The project relies on several categories of input data:
+
+### Raster data (GeoTIFF)
+
+Used to extract yearly mean pollution and NDVI values.
+
+- NDVI_YYYY.tif
+
+- NO2_YYYY.tif, O3_YYYY.tif, SO2_YYYY.tif, PM10_YYYY.tif
+
+These files contain spatially distributed yearly averages (2010–2018).
+
+### Vector data
+
+- swissBOUNDARIES3D_1_5_TLM_BEZIRKSGEBIET.shp
+Administrative boundaries used for spatial aggregation.
+
+### CSV files
+
+- NDVI_NO2_timeseries.csv
+NDVI and pollution time series per region (2010–2018).
+
+- CH4_concentration.csv
+- CO2_concentration.csv
 
 ### Output files
 
