@@ -222,7 +222,7 @@ print(f"\n✔ FINAL FILE CREATED (without 2012): {final_path}")
 # LOAD THE FINAL CSV AND PROCESS THE POLLUTION DATA
 # ---------------------------------------------------------
 # Load the final pollution dataset into a DataFrame
-df = pd.read_csv("Switzerland_pollution_timeseries_COMPLETE.csv")
+df = pd.read_csv("data/Switzerland_pollution_timeseries_COMPLETE.csv")
 
 # Print available column names to verify correct loading
 print("Available columns:", df.columns.tolist())
@@ -248,7 +248,7 @@ model.fit(X, y)
 weights = pd.Series(model.coef_, index=X.columns)
 
 # Save the weights in a CSV file
-weights.to_csv("poids_globaux.csv", header=["Poids"], index_label="Pollutants")
+weights.to_csv("data/poids_globaux.csv", header=["Poids"], index_label="Pollutants")
 
 # Print out the computed global weights for each pollutant
 print("Global weights calculated and saved in 'poids_globaux.csv'")
@@ -258,10 +258,10 @@ print(weights)
 # CALCULATE THE GLOBAL POLLUTION FOR EACH YEAR
 # ---------------------------------------------------------
 # Load the updated pollution data
-df = pd.read_csv("Switzerland_pollution_timeseries_COMPLETE.csv")
+df = pd.read_csv("data/Switzerland_pollution_timeseries_COMPLETE.csv")
 
 # Load the global weights from the CSV file
-weights = pd.read_csv("poids_globaux.csv", index_col=0)["Poids"]
+weights = pd.read_csv("data/poids_globaux.csv", index_col=0)["Poids"]
 
 # Calculate the global pollution index for each row in the DataFrame using the linear model
 df["PollutionGlobale"] = (
@@ -277,7 +277,7 @@ df["PollutionGlobale"] = (
 pollution_each_year = df.groupby("Year")["PollutionGlobale"].mean().reset_index()
 
 # Save the aggregated pollution data to a CSV file
-pollution_each_year.to_csv("pollution_each_year.csv", index=False)
+pollution_each_year.to_csv("data/pollution_each_year.csv", index=False)
 
 # Print confirmation that the pollution data for each year has been created
 print("File 'pollution_each_year.csv' created successfully!")
@@ -287,7 +287,7 @@ print(pollution_each_year.head())
 # CALCULATE THE NATIONAL NDVI AND MERGE WITH POLLUTION DATA
 # ---------------------------------------------------------
 # Load the pollution data and the NDVI dataset
-poll_path = "pollution_each_year.csv"
+poll_path = "data/pollution_each_year.csv"
 ndvi_path = "data/NDVI_NO2_timeseries.csv"
 
 df_poll = pd.read_csv(poll_path)  # Pollution data by year
@@ -334,7 +334,7 @@ warnings.filterwarnings("ignore", category=OptimizeWarning)
 # 1. Load dataset with pollution and NDVI data
 # ------------------------------------------------------
 # Load the dataset that contains 'Year', 'NDVI', and 'PollutionGlobale' columns
-df = pd.read_csv("pollution_each_year_WITH_NDVI.csv")
+df = pd.read_csv("data/pollution_each_year_WITH_NDVI.csv")
 df = df.dropna(subset=["NDVI", "PollutionGlobale"])  # Drop rows with missing NDVI or pollution values
 
 # ------------------------------------------------------
@@ -406,7 +406,7 @@ print(results_df.head())
 # ------------------------------------------------------
 # LOAD THE HISTORICAL FILE AND EXTRACT LAST ROW FOR FUTURE CONSTANTS
 # ------------------------------------------------------
-df = pd.read_csv('fitted_parameters.csv').sort_values('Year')
+df = pd.read_csv('data/fitted_parameters.csv').sort_values('Year')
 last_row = df.iloc[-1]  # Get last row for constants (latest year)
 r0_const, K_const, B0_const, P_base = map(float, last_row[['r0', 'K', 'B0', 'P']])
 
