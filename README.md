@@ -50,26 +50,31 @@ NDVI and pollution time series per region (2010–2018).
 
 ### CSV outputs
 
-Future pollution and NDVI scenarios
+- NDVI_scenario_XXX.csv
+
+Final dataset containg NDVI for each scenario in 3 csv file per region (2019-2050)
 
 - ndvi_futur_combined.csv
+  
 Final dataset containing projected NDVI and pollution values for Switzerland (2019–2050).
 
 ### Figures
 
-NDVI projections under three scenarios
+NDVI projections under three scenarios (different scale, region/Switzerland, NO2/P_global) :
 
-High-precision NDVI sensitivity plots
+- NDVI_predictions_Switzerland_adaptive_scale.png
 
-Global pollution scenario evolution
+- NDVI_predictions_Switzerland_precise_scale.png
 
-Example outputs:
+- Ouest_Lausanne_prediction.png
 
-NDVI_predictions_Switzerland_adaptive_scale.png
+Global pollution scenario evolution :
 
-NDVI_predictions_Switzerland_precise_scale.png
+- Global_pollution_scenarios_Switzerland.png
 
-Global_pollution_scenarios_Switzerland.png
+High-precision NDVI sensitivity to NO2 :
+
+- NDVI_sensitivity_to_NO2.png
 
 ### Report
 
