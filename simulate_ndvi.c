@@ -11,10 +11,10 @@
    ----------------------------------------------------------- */
 
 /* >>>>> Renseigne ici les noms des fichiers si tu veux les changer <<<<< */
-static const char* FILE_UP   = "scenario_P_up.csv";   // P_up (+1%/an)
-static const char* FILE_DOWN = "scenario_P_down.csv";  // P_down (-1%/an)
-static const char* FILE_CST  = "scenario_P_constant.csv";   // P_cst (constant)
-static const char* FILE_OUT  = "ndvi_futur_combined.csv";             // sortie fusionnée
+static const char* FILE_UP   = "data/scenario_P_up.csv";   // P_up (+1%/an)
+static const char* FILE_DOWN = "data/scenario_P_down.csv";  // P_down (-1%/an)
+static const char* FILE_CST  = "data/scenario_P_constant.csv";   // P_cst (constant)
+static const char* FILE_OUT  = "Results/ndvi_futur_combined.csv";             // sortie fusionnée
 
 #define MAX_ROWS 512
 #define MAX_LINE 2048
