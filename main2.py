@@ -115,7 +115,11 @@ else:
 # -------------------------
 # PROCESS ALL TIF FILES IN data/
 # -------------------------
-tif_files = sorted(glob.glob(pattern))  # Get all .tif files in the 'data' folder
+tif_files = sorted(
+    f for f in glob.glob(pattern)  # Get all .tif files in the 'data' folder except the NDVI ones 
+    if not os.path.basename(f).startswith("NDVI_")   
+) 
+
 if len(tif_files) == 0:
     raise SystemExit("No .tif files found in data/")  # Exit if no .tif files are found
 
