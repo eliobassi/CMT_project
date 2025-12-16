@@ -8,6 +8,7 @@ import warnings
 from sklearn.linear_model import LinearRegression
 from scipy.optimize import curve_fit, OptimizeWarning
 import subprocess
+import matplotlib.pyplot as plt
 
 # -------------------------
 # SETTINGS
@@ -456,3 +457,147 @@ subprocess.run(["gcc", "simulate_ndvi.c", "-Wall", "-lm", "-o", "a.out"], check=
 # Run the compiled C program
 subprocess.run(["./a.out"], check=True)
 
+# ==================================================
+# Load dataset (same folder as this script)
+# ==================================================
+df = pd.read_csv("Results/ndvi_futur_combined.csv")
+
+# NDVI columns for the three scenarios
+ndvi_cols = ["NDVI_up", "NDVI_down", "NDVI_cst"]
+
+# ==================================================
+# ----------- PLOT 1 : ADAPTIVE SCALE ---------------
+# ==================================================
+
+# Stack all NDVI values to analyze real variability
+ndvi_values = df[ndvi_cols].values.flatten()
+ndvi_values = ndvi_values[~np.isnan(ndvi_values)]
+
+# Compute year-to-year absolute differences
+diffs = []
+for col in ndvi_cols:
+    diffs.extend(np.abs(np.diff(df[col].values)))
+
+diffs = np.array(diffs)
+diffs = diffs[diffs > 0]
+
+# Smallest meaningful NDVI variation
+min_diff = diffs.min()
+
+# Define adaptive limits
+ndvi_min = ndvi_values.min()
+ndvi_max = ndvi_values.max()
+margin = 5 * min_diff
+
+ymin = ndvi_min - margin
+ymax = ndvi_max + margin
+
+# ---- Plot 1
+plt.figure(figsize=(10, 6))
+
+plt.plot(df["Year"], df["NDVI_up"],
+         label="Global pollution +1% / year", linewidth=2, color="green")
+
+plt.plot(df["Year"], df["NDVI_down"],
+         label="Global pollution -1% / year", linewidth=2, color="orange")
+
+plt.plot(df["Year"], df["NDVI_cst"],
+         label="Constant global pollution", linewidth=2, color="blue")
+
+plt.xlabel("Year", fontsize=13)
+plt.ylabel("Predicted NDVI", fontsize=13)
+plt.title("Projected NDVI for Switzerland (2019–2050)\nAdaptive scale", fontsize=15)
+
+plt.ylim(ymin, ymax)
+plt.grid(True, linestyle="--", alpha=0.6)
+plt.legend()
+plt.tight_layout()
+
+plt.savefig("Results/NDVI_predictions_Switzerland_adaptive_scale.png", dpi=300)
+plt.show()
+
+print("Adaptive-scale NDVI plot created.")
+
+# ==================================================
+# ----------- PLOT 2 : FIXED PRECISE SCALE ----------
+# ==================================================
+
+plt.figure(figsize=(10, 6))
+
+plt.plot(
+    df["Year"], df["NDVI_up"],
+    label="Pollution +1% per year",
+    linewidth=2,
+    color="green"
+)
+
+plt.plot(
+    df["Year"], df["NDVI_down"],
+    label="Pollution -1% per year",
+    linewidth=2,
+    color="orange"
+)
+
+plt.plot(
+    df["Year"], df["NDVI_cst"],
+    label="Constant pollution",
+    linewidth=2,
+    color="blue"
+)
+
+plt.xlabel("Year", fontsize=14)
+plt.ylabel("Predicted NDVI", fontsize=14)
+plt.title("NDVI Predictions for Switzerland (2019–2050)\nFixed high-precision scale",
+          fontsize=16)
+
+# Very narrow NDVI range to highlight tiny differences
+plt.ylim(0.49000, 0.49500)
+
+plt.grid(True, linestyle="--", alpha=0.6)
+plt.legend(fontsize=12)
+plt.tight_layout()
+
+plt.savefig("Results/NDVI_predictions_Switzerland_precise_scale.png", dpi=300)
+plt.show()
+
+print("Fixed-scale high-precision NDVI plot created.")
+
+# ==================================================
+# Plot 3 — Global pollution scenarios (P vs Year)
+# ==================================================
+# This plot shows the evolution of the global pollution
+# index P over time for the three future scenarios.
+
+plt.figure(figsize=(10, 6))
+
+plt.plot(
+    df["Year"], df["P_up"],
+    label="Pollution +1% per year",
+    linewidth=2,
+    color="green"
+)
+
+plt.plot(
+    df["Year"], df["P_down"],
+    label="Pollution -1% per year",
+    linewidth=2,
+    color="orange"
+)
+
+plt.plot(
+    df["Year"], df["P_cst"],
+    label="Constant pollution",
+    linewidth=2,
+    color="blue"
+)
+
+plt.xlabel("Year")
+plt.ylabel("Global pollution index (P)")
+plt.title("Global Pollution Scenarios for Switzerland (2019–2050)")
+
+plt.grid(True, linestyle="--", alpha=0.6)
+plt.legend()
+plt.tight_layout()
+
+plt.savefig("Results/Global_pollution_scenarios_Switzerland.png", dpi=300)
+plt.show()
