@@ -449,6 +449,8 @@ build_df(P_plus1).to_csv('data/scenario_P_up.csv', index=False)
 print("Scenario files created: 'scenario_P_constant.csv', 'scenario_P_down.csv', 'scenario_P_up.csv'")
 
 # -------------------------------
+# SUBPROCESS RUNNING C PROGRAM
+# -------------------------------
 # Running the C program via subprocess 
 
 # Compile the C program
@@ -457,6 +459,8 @@ subprocess.run(["gcc", "simulate_ndvi.c", "-Wall", "-lm", "-o", "a.out"], check=
 # Run the compiled C program
 subprocess.run(["./a.out"], check=True)
 
+
+# PLOT 
 # ==================================================
 # Load dataset (same folder as this script)
 # ==================================================
