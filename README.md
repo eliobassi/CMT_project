@@ -20,11 +20,11 @@ The project combines :
 
 ### Input files
 
-The project relies on several categories of input data:
+The project relies on several categories of input data :
 
 ### Raster data (GeoTIFF)
 
-Used to extract yearly mean pollution and NDVI values.
+Used to extract yearly mean pollution and NDVI values :
 
 - NDVI_YYYY.tif
 
@@ -42,7 +42,7 @@ Administrative boundaries used for spatial aggregation.
 
 - NDVI_NO2_timeseries.csv
   
-NDVI and pollution time series per region (2010–2018).
+NDVI and pollution dataframe per region (2010–2018).
 
 - CH4_concentration.csv
 - CO2_concentration.csv
