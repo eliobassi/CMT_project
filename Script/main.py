@@ -14,11 +14,11 @@ import subprocess
 # FILE SETTINGS
 # -------------------------
 # Path to the shapefile containing boundary data for regions
-shp_path = "data/swissBOUNDARIES3D_1_5_TLM_BEZIRKSGEBIET.shp"
+shp_path = "CMT_project/data/swissBOUNDARIES3D_1_5_TLM_BEZIRKSGEBIET.shp"
 
 # List all NDVI and NO2 raster files in the current directory, sorted by filename
-ndvi_files = sorted(glob.glob("data/NDVI_*.tif"))
-no2_files  = sorted(glob.glob("data/NO2_*.tif"))
+ndvi_files = sorted(glob.glob("CMT_project/data/NDVI_*.tif"))
+no2_files  = sorted(glob.glob("CMT_project/data/NO2_*.tif"))
 
 # Regex pattern to extract the year from the filenames of NDVI raster files (e.g., NDVI_2010.tif)
 year_pattern = re.compile(r".*_(\d{4})\.tif$")
@@ -117,7 +117,7 @@ df = pd.DataFrame(all_rows)
 # Sort the DataFrame by Region and Year
 df = df.sort_values(["Region", "Year"])
 # Save the results to a CSV file
-df.to_csv("data/NDVI_NO2_timeseries.csv", index=False)
+df.to_csv("CMT_project/data/NDVI_NO2_timeseries.csv", index=False)
 
 print("NDVI_NO2_timeseries.csv created successfully")
 
@@ -128,7 +128,7 @@ warnings.filterwarnings("ignore", category=OptimizeWarning)
 # 1. Load dataset
 # ------------------------------------------------------
 # Load the NDVI and NO2 time series dataset from the CSV file
-df = pd.read_csv("data/NDVI_NO2_timeseries.csv")
+df = pd.read_csv("CMT_project/data/NDVI_NO2_timeseries.csv")
 
 # Remove rows missing NDVI or NO₂
 df = df.dropna(subset=["Mean_NDVI", "Mean_NO2"])
@@ -245,12 +245,12 @@ results_df["r0_global"] = r0
 results_df["alpha_global"] = alpha
 
 # Save the results with the fitted parameters to a CSV file
-results_df.to_csv("data/fitted_parameters.csv", index=False)
+results_df.to_csv("CMT_project/data/fitted_parameters.csv", index=False)
 print("saved fitted_parameters.csv")
 
 
 # Load fitted parameters to get last known NO2 per region
-df = pd.read_csv("data/fitted_parameters.csv")
+df = pd.read_csv("CMT_project/data/fitted_parameters.csv")
 
 # Get a list of all regions
 regions = df["Region"].unique()
@@ -288,15 +288,15 @@ def make_rows(modifier):
 
 # Scenario A: NO2 stays constant
 rows_const = make_rows("constant")
-pd.DataFrame(rows_const).to_csv("data/future_NO2_constant.csv", index=False)
+pd.DataFrame(rows_const).to_csv("CMT_project/data/future_NO2_constant.csv", index=False)
 
 # Scenario B: NO2 decreases 1% per year
 rows_minus = make_rows("minus1")
-pd.DataFrame(rows_minus).to_csv("data/future_NO2_minus1percent.csv", index=False)
+pd.DataFrame(rows_minus).to_csv("CMT_project/data/future_NO2_minus1percent.csv", index=False)
 
 # Scenario C: NO2 increases 1% per year
 rows_plus = make_rows("plus1")
-pd.DataFrame(rows_plus).to_csv("data/future_NO2_plus1percent.csv", index=False)
+pd.DataFrame(rows_plus).to_csv("CMT_project/data/future_NO2_plus1percent.csv", index=False)
 
 # Print the generated CSV files for the different scenarios
 print("Generated:")
@@ -308,7 +308,7 @@ print("  - future_NO2_plus1percent.csv")
 # ------------------------------------------------------
 # --- 1. Load the fitted parameters ---
 # ------------------------------------------------------
-df_fitted = pd.read_csv("data/fitted_parameters.csv")
+df_fitted = pd.read_csv("CMT_project/data/fitted_parameters.csv")
 
 # List of columns that need to be removed from the fitted parameters (these will be merged later)
 cols_to_drop = ["Mean_NO2", "Mean_NDVI", "Year"]
@@ -323,9 +323,9 @@ for col in cols_to_drop:
 # --- 2. Load the NO2 scenario data ---
 # ------------------------------------------------------
 # Load the future NO2 scenarios generated earlier
-scenario_const = pd.read_csv("data/future_NO2_constant.csv")
-scenario_minus = pd.read_csv("data/future_NO2_minus1percent.csv")
-scenario_plus  = pd.read_csv("data/future_NO2_plus1percent.csv")
+scenario_const = pd.read_csv("CMT_project/data/future_NO2_constant.csv")
+scenario_minus = pd.read_csv("CMT_project/data/future_NO2_minus1percent.csv")
+scenario_plus  = pd.read_csv("CMT_project/data/future_NO2_plus1percent.csv")
 
 
 # --- 3. Function to merge and clean the scenarios ---
@@ -365,9 +365,9 @@ clean_plus  = merge_and_clean(scenario_plus, df_fitted, "NO2 +1%/an")
 
 # -# --- 5. Save the cleaned and merged scenarios to new CSV files ---
 # Save the final cleaned datasets to CSV files for each scenario
-clean_const.to_csv("data/scenario_with_params_constant_clean.csv", index=False)
-clean_minus.to_csv("data/scenario_with_params_minus1percent_clean.csv", index=False)
-clean_plus.to_csv("data/scenario_with_params_plus1percent_clean.csv", index=False)
+clean_const.to_csv("CMT_project/data/scenario_with_params_constant_clean.csv", index=False)
+clean_minus.to_csv("CMT_project/data/scenario_with_params_minus1percent_clean.csv", index=False)
+clean_plus.to_csv("CMT_project/data/scenario_with_params_plus1percent_clean.csv", index=False)
 
 print("\n Files generated :")
 print(" scenario_with_params_constant_clean.csv created")
@@ -378,10 +378,10 @@ print(" scenario_with_params_plus1percent_clean.csv created")
 # Running the C program via subprocess 
 
 # Compile the C program
-subprocess.run(["gcc", "Script/growth_sim_30years.c", "-Wall", "-lm", "-o", "Bin/growth_sim_30years"], check=True)
+subprocess.run(["gcc", "CMT_project/Script/growth_sim_30years.c", "-Wall", "-lm", "-o", "CMT_project/Bin/growth_sim_30years"], check=True)
 
 # Run the compiled C program
-subprocess.run(["./Bin/growth_sim_30years"], check=True)
+subprocess.run(["./CMT_project/Bin/growth_sim_30years"], check=True)
 
 
 # -------------------------------
@@ -394,9 +394,9 @@ region_of_interest = "Ouest lausannois"
 # -------------------------------
 # Load the three scenario outputs
 # -------------------------------
-df_constant = pd.read_csv("Results/NDVI_scenario_constant.csv")
-df_minus = pd.read_csv("Results/NDVI_scenario_minus1percent.csv")
-df_plus  = pd.read_csv("Results/NDVI_scenario_plus1percent.csv")
+df_constant = pd.read_csv("CMT_project/Results/NDVI_scenario_constant.csv")
+df_minus = pd.read_csv("CMT_project/Results/NDVI_scenario_minus1percent.csv")
+df_plus  = pd.read_csv("CMT_project/Results/NDVI_scenario_plus1percent.csv")
 
 # -------------------------------
 # Filter for the chosen region
@@ -446,7 +446,7 @@ print(" Plot 'Future NDVI Predictions for Ouest Lausanne' created ")
 # ----------------------------------------------------
 # Load dataset
 # ----------------------------------------------------
-df = pd.read_csv("data/fitted_parameters.csv")
+df = pd.read_csv("CMT_project/data/fitted_parameters.csv")
 
 # Filter valid rows (positive r values only)
 clean = df[df["r_estimated"] > 0].copy()
