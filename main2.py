@@ -211,7 +211,7 @@ df_wide = df_wide[df_wide["Year"] != 2012]
 # SAVE FINAL CSV
 # ---------------------------------------------------------
 # Save the DataFrame after removing the year 2012
-final_path = "Switzerland_pollution_timeseries_COMPLETE.csv"
+final_path = "data/Switzerland_pollution_timeseries_COMPLETE.csv"
 df_wide.to_csv(final_path, index=False)  # Save the DataFrame without the index column
 
 # Print confirmation that the final file (without 2012) has been created
@@ -318,7 +318,7 @@ df_final = df_poll.merge(ndvi_national, on="Year", how="left")
 # SAVE FINAL FILE WITH NDVI AND POLLUTION DATA
 # ---------------------------------------------------------
 # Save the final DataFrame that contains both pollution and national NDVI data
-out_path = "pollution_each_year_WITH_NDVI.csv"
+out_path = "data/pollution_each_year_WITH_NDVI.csv"
 df_final.to_csv(out_path, index=False)
 
 # Print confirmation that the final merged file has been created
@@ -398,7 +398,7 @@ results_df = pd.DataFrame(rows)
 # 5. SAVE THE OUTPUT DATAFRAME
 # ------------------------------------------------------
 # Save the DataFrame to CSV with fitted parameters.
-results_df.to_csv("fitted_parameters.csv", index=False)
+results_df.to_csv("data/fitted_parameters.csv", index=False)
 print("saved fitted_parameters.csv")
 print(results_df.head())
 
@@ -440,9 +440,9 @@ def build_df(P_series):
 # CREATE AND SAVE THE SCENARIO FILES
 # ------------------------------------------------------
 # Create and save the scenario DataFrames for each pollution scenario.
-build_df(P_const).to_csv('scenario_P_constant.csv', index=False)
-build_df(P_minus1).to_csv('scenario_P_down.csv', index=False)
-build_df(P_plus1).to_csv('scenario_P_up.csv', index=False)
+build_df(P_const).to_csv('data/scenario_P_constant.csv', index=False)
+build_df(P_minus1).to_csv('data/scenario_P_down.csv', index=False)
+build_df(P_plus1).to_csv('data/scenario_P_up.csv', index=False)
 
 print("Scenario files created: 'scenario_P_constant.csv', 'scenario_P_down.csv', 'scenario_P_up.csv'")
 
