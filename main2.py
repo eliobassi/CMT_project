@@ -197,7 +197,7 @@ df_wide = df_wide.merge(ndvi_national, on="Year", how="left")
 # ---------------------------------------------------------
 # SAVE **ONLY** THE FINAL CSV (NO TEMPORARY FILES)
 # ---------------------------------------------------------
-final_path = "Switzerland_pollution_timeseries_COMPLETE.csv"  # Path to save the final DataFrame
+final_path = "data/Switzerland_pollution_timeseries_COMPLETE.csv"  # Path to save the final DataFrame
 df_wide.to_csv(final_path, index=False)  # Save the DataFrame to a CSV file without the index column
 
 # Print confirmation that the final file has been created
