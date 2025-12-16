@@ -34,11 +34,13 @@ These files contain spatially distributed yearly averages (2010–2018).
 ### Vector data
 
 - swissBOUNDARIES3D_1_5_TLM_BEZIRKSGEBIET.shp
+  
 Administrative boundaries used for spatial aggregation.
 
 ### CSV files
 
 - NDVI_NO2_timeseries.csv
+  
 NDVI and pollution time series per region (2010–2018).
 
 - CH4_concentration.csv
