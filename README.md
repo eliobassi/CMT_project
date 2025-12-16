@@ -5,17 +5,17 @@ This project investigates the relationship between air pollution and vegetation 
 
 The core objective is to model and project future NDVI trajectories at the national scale under three global pollution scenarios (increase, decrease, constant).
 
-The project combines:
+The project combines :
 
-Remote sensing data (NDVI and air pollutants),
+- Remote sensing data (NDVI and air pollutants),
 
-Statistical parameter fitting,
+- Statistical parameter fitting,
 
-Numerical simulation of vegetation growth,
+- Numerical simulation of vegetation growth,
 
-Scenario-based projections, and
+- Scenario-based projections, and
 
-Scientific visualization.
+- Scientific visualization.
 
 ### Input files
 
