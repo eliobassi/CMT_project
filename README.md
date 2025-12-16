@@ -17,6 +17,7 @@ The project combines :
 
 - Scientific visualization.
 
+
 ### Input files
 
 The project relies on several categories of input data:
@@ -45,6 +46,7 @@ NDVI and pollution time series per region (2010–2018).
 
 - CH4_concentration.csv
 - CO2_concentration.csv
+
 
 ### Output files
 
@@ -75,6 +77,7 @@ Global pollution scenario evolution :
 High-precision NDVI sensitivity to NO2 :
 
 - NDVI_sensitivity_to_NO2.png
+
 
 ### Report
 
