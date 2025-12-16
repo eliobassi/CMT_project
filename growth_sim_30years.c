@@ -99,13 +99,13 @@ void simulate_growth(char *scenario_csv, char *output_csv) {
 
 int main(int argc, char *argv[]) {
 // Call the simulate_growth function with the input and output file names provided as arguments
-    simulate_growth("Data/scenario_with_params_constant_clean.csv",
+    simulate_growth("data/scenario_with_params_constant_clean.csv",
                     "Results/NDVI_scenario_constant.csv");
 
-    simulate_growth("Data/scenario_with_params_minus1percent_clean.csv",
+    simulate_growth("data/scenario_with_params_minus1percent_clean.csv",
                     "Results/NDVI_scenario_minus1percent.csv");
 
-    simulate_growth("Data/scenario_with_params_plus1percent_clean.csv",
+    simulate_growth("data/scenario_with_params_plus1percent_clean.csv",
                     "Results/NDVI_scenario_plus1percent.csv");
 
     return 0;
