@@ -1,8 +1,21 @@
 
 
 ## Project Description
+This project investigates the relationship between air pollution and vegetation dynamics in Switzerland using NDVI (Normalized Difference Vegetation Index) as a proxy for vegetation health.
 
-Describe the purpose of the program.
+The core objective is to model and project future NDVI trajectories at the national scale under three global pollution scenarios (increase, decrease, constant).
+
+The project combines:
+
+Remote sensing data (NDVI and air pollutants),
+
+Statistical parameter fitting,
+
+Numerical simulation of vegetation growth,
+
+Scenario-based projections, and
+
+Scientific visualization.
 
 ### Input files
 
