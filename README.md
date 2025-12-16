@@ -99,21 +99,24 @@ All scripts were tested using a Micromamba/Conda environment.
 
 ### Build
 
-Describe how the C program should be compiled (using gcc or mex). The executable or shared object file can be placed in the "bin/" directory.
+Th C program is compiled using 'gcc file_name.c -Wall -lm -o a.out' and run using './a.out' via subprocess in the python code.
 
 ### Execute
 
-Describe how the program should be executed. Ideally, it will be automated to one line of code in a terminal running Bash (e.g., `matlab -batch src/myscript`), with the outputs generated to "results/".
+The program is executed by automatation in one line of code in a terminal running Bash (e.g., `matlab -batch src/myscript`), with the outputs generated to "Results/".
 
 ## Contributors
 
-List the authors of the code.
+Bassi Elio, Saissi Emilie, Strazza Maxime
 
 ## Acknowledgments
 
 ### Data sources
 
-Describe sources of data here.
+- NDVI datasets from
+- Atmospheric pollution datasets from 'map.geo.admin.ch' (NO₂, O₃, SO₂, PM10)
+- CH4 datasets from
+- CO2 datsets from 
 
 ### Code
 
