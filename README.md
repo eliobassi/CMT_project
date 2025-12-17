@@ -115,7 +115,7 @@ Required Python packages:
 
 ### Build
 
-Th C program is compiled using 'gcc file_name.c -Wall -lm' and run via subprocess in the python code.
+The C program is compiled using 'gcc file_name.c -Wall -lm' and run via subprocess in the python code.
 
 ### Execute
 
