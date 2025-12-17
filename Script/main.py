@@ -10,6 +10,7 @@ import re
 import matplotlib.pyplot as plt
 import subprocess
 
+# First part of the project that will be executed in main2.py
 def treatment():
     # -------------------------
     # FILE SETTINGS
