@@ -9,11 +9,14 @@ from sklearn.linear_model import LinearRegression
 from scipy.optimize import curve_fit, OptimizeWarning
 import subprocess
 import matplotlib.pyplot as plt
+from main import treatment
 
+
+treatment()
 # -------------------------
 # SETTINGS
 # -------------------------
-data_folder = "CMT_project/data"  # Define the folder where your input data (e.g., .tif and .csv files) is stored
+data_folder = "data"  # Define the folder where your input data (e.g., .tif and .csv files) is stored
 pattern = os.path.join(data_folder, "*.tif")  # Search pattern for finding all .tif files in the 'data' folder
 
 # Regex to extract the year from the filename (e.g., "pollutant_2010.tif" -> "2010")
@@ -163,7 +166,7 @@ df_wide = df_wide[cols]
 # -------------------------
 # SAVE final wide CSV
 # -------------------------
-out_path = "CMT_project/data/Switzerland_pollution_timeseries_COMPLETE.csv"
+out_path = "data/Switzerland_pollution_timeseries_COMPLETE.csv"
 df_wide.to_csv(out_path, index=False)  # Save the DataFrame to a CSV file
 print(f"\nSaved {out_path}")
 
@@ -200,7 +203,7 @@ df_wide = df_wide.merge(ndvi_national, on="Year", how="left")
 # ---------------------------------------------------------
 # SAVE **ONLY** THE FINAL CSV (NO TEMPORARY FILES)
 # ---------------------------------------------------------
-final_path = "CMT_project/data/Switzerland_pollution_timeseries_COMPLETE.csv"  # Path to save the final DataFrame
+final_path = "data/Switzerland_pollution_timeseries_COMPLETE.csv"  # Path to save the final DataFrame
 df_wide.to_csv(final_path, index=False)  # Save the DataFrame to a CSV file without the index column
 
 # Print confirmation that the final file has been created
@@ -216,7 +219,7 @@ df_wide = df_wide[df_wide["Year"] != 2012]
 # SAVE FINAL CSV
 # ---------------------------------------------------------
 # Save the DataFrame after removing the year 2012
-final_path = "CMT_project/data/Switzerland_pollution_timeseries_COMPLETE.csv"
+final_path = "data/Switzerland_pollution_timeseries_COMPLETE.csv"
 df_wide.to_csv(final_path, index=False)  # Save the DataFrame without the index column
 
 # Print confirmation that the final file (without 2012) has been created
@@ -227,7 +230,7 @@ print(f"\n✔ FINAL FILE CREATED (without 2012): {final_path}")
 # LOAD THE FINAL CSV AND PROCESS THE POLLUTION DATA
 # ---------------------------------------------------------
 # Load the final pollution dataset into a DataFrame
-df = pd.read_csv("CMT_project/data/Switzerland_pollution_timeseries_COMPLETE.csv")
+df = pd.read_csv("data/Switzerland_pollution_timeseries_COMPLETE.csv")
 
 # Print available column names to verify correct loading
 print("Available columns:", df.columns.tolist())
@@ -253,7 +256,7 @@ model.fit(X, y)
 weights = pd.Series(model.coef_, index=X.columns)
 
 # Save the weights in a CSV file
-weights.to_csv("CMT_project/data/poids_globaux.csv", header=["Poids"], index_label="Pollutants")
+weights.to_csv("data/poids_globaux.csv", header=["Poids"], index_label="Pollutants")
 
 # Print out the computed global weights for each pollutant
 print("Global weights calculated and saved in 'poids_globaux.csv'")
@@ -263,10 +266,10 @@ print(weights)
 # CALCULATE THE GLOBAL POLLUTION FOR EACH YEAR
 # ---------------------------------------------------------
 # Load the updated pollution data
-df = pd.read_csv("CMT_project/data/Switzerland_pollution_timeseries_COMPLETE.csv")
+df = pd.read_csv("data/Switzerland_pollution_timeseries_COMPLETE.csv")
 
 # Load the global weights from the CSV file
-weights = pd.read_csv("CMT_project/data/poids_globaux.csv", index_col=0)["Poids"]
+weights = pd.read_csv("data/poids_globaux.csv", index_col=0)["Poids"]
 
 # Calculate the global pollution index for each row in the DataFrame using the linear model
 df["PollutionGlobale"] = (
@@ -282,7 +285,7 @@ df["PollutionGlobale"] = (
 pollution_each_year = df.groupby("Year")["PollutionGlobale"].mean().reset_index()
 
 # Save the aggregated pollution data to a CSV file
-pollution_each_year.to_csv("CMT_project/data/pollution_each_year.csv", index=False)
+pollution_each_year.to_csv("data/pollution_each_year.csv", index=False)
 
 # Print confirmation that the pollution data for each year has been created
 print("File 'pollution_each_year.csv' created successfully!")
@@ -292,8 +295,8 @@ print(pollution_each_year.head())
 # CALCULATE THE NATIONAL NDVI AND MERGE WITH POLLUTION DATA
 # ---------------------------------------------------------
 # Load the pollution data and the NDVI dataset
-poll_path = "CMT_project/data/pollution_each_year.csv"
-ndvi_path = "CMT_project/data/NDVI_NO2_timeseries.csv"
+poll_path = "data/pollution_each_year.csv"
+ndvi_path = "data/NDVI_NO2_timeseries.csv"
 
 df_poll = pd.read_csv(poll_path)  # Pollution data by year
 df_ndvi = pd.read_csv(ndvi_path)  # NDVI data
@@ -323,7 +326,7 @@ df_final = df_poll.merge(ndvi_national, on="Year", how="left")
 # SAVE FINAL FILE WITH NDVI AND POLLUTION DATA
 # ---------------------------------------------------------
 # Save the final DataFrame that contains both pollution and national NDVI data
-out_path = "CMT_project/data/pollution_each_year_WITH_NDVI.csv"
+out_path = "data/pollution_each_year_WITH_NDVI.csv"
 df_final.to_csv(out_path, index=False)
 
 # Print confirmation that the final merged file has been created
@@ -339,7 +342,7 @@ warnings.filterwarnings("ignore", category=OptimizeWarning)
 # 1. Load dataset with pollution and NDVI data
 # ------------------------------------------------------
 # Load the dataset that contains 'Year', 'NDVI', and 'PollutionGlobale' columns
-df = pd.read_csv("CMT_project/data/pollution_each_year_WITH_NDVI.csv")
+df = pd.read_csv("data/pollution_each_year_WITH_NDVI.csv")
 df = df.dropna(subset=["NDVI", "PollutionGlobale"])  # Drop rows with missing NDVI or pollution values
 
 # ------------------------------------------------------
@@ -403,7 +406,7 @@ results_df = pd.DataFrame(rows)
 # 5. SAVE THE OUTPUT DATAFRAME
 # ------------------------------------------------------
 # Save the DataFrame to CSV with fitted parameters.
-results_df.to_csv("CMT_project/data/fitted_parameters.csv", index=False)
+results_df.to_csv("data/fitted_parameters.csv", index=False)
 print("saved fitted_parameters.csv")
 print(results_df.head())
 
@@ -411,7 +414,7 @@ print(results_df.head())
 # ------------------------------------------------------
 # LOAD THE HISTORICAL FILE AND EXTRACT LAST ROW FOR FUTURE CONSTANTS
 # ------------------------------------------------------
-df = pd.read_csv('CMT_project/data/fitted_parameters.csv').sort_values('Year')
+df = pd.read_csv('data/fitted_parameters.csv').sort_values('Year')
 last_row = df.iloc[-1]  # Get last row for constants (latest year)
 r0_const, K_const, B0_const, P_base = map(float, last_row[['r0', 'K', 'B0', 'P']])
 
@@ -445,9 +448,9 @@ def build_df(P_series):
 # CREATE AND SAVE THE SCENARIO FILES
 # ------------------------------------------------------
 # Create and save the scenario DataFrames for each pollution scenario.
-build_df(P_const).to_csv('CMT_project/data/scenario_P_constant.csv', index=False)
-build_df(P_minus1).to_csv('CMT_project/data/scenario_P_down.csv', index=False)
-build_df(P_plus1).to_csv('CMT_project/data/scenario_P_up.csv', index=False)
+build_df(P_const).to_csv('data/scenario_P_constant.csv', index=False)
+build_df(P_minus1).to_csv('data/scenario_P_down.csv', index=False)
+build_df(P_plus1).to_csv('data/scenario_P_up.csv', index=False)
 
 print("Scenario files created: 'scenario_P_constant.csv', 'scenario_P_down.csv', 'scenario_P_up.csv'")
 
@@ -457,17 +460,17 @@ print("Scenario files created: 'scenario_P_constant.csv', 'scenario_P_down.csv',
 # Running the C program via subprocess 
 
 # Compile the C program
-subprocess.run(["gcc", "CMT_project/Script/simulate_ndvi.c", "-Wall", "-lm", "-o", "CMT_project/Bin/simulate_ndvi"], check=True)
+subprocess.run(["gcc", "Script/simulate_ndvi.c", "-Wall", "-lm", "-o", "Bin/simulate_ndvi"], check=True)
 
 # Run the compiled C program
-subprocess.run(["./CMT_project/Bin/simulate_ndvi"], check=True)
+subprocess.run(["./Bin/simulate_ndvi"], check=True)
 
 
 # PLOT 
 # ==================================================
 # Load dataset (same folder as this script)
 # ==================================================
-df = pd.read_csv("CMT_project/Results/ndvi_futur_combined.csv")
+df = pd.read_csv("Results/ndvi_futur_combined.csv")
 
 # NDVI columns for the three scenarios
 ndvi_cols = ["NDVI_up", "NDVI_down", "NDVI_cst"]
@@ -520,7 +523,7 @@ plt.grid(True, linestyle="--", alpha=0.6)
 plt.legend()
 plt.tight_layout()
 
-plt.savefig("CMT_project/Results/NDVI_predictions_Switzerland_adaptive_scale.png", dpi=300)
+plt.savefig("Results/NDVI_predictions_Switzerland_adaptive_scale.png", dpi=300)
 plt.show()
 
 print("Adaptive-scale NDVI plot created.")
@@ -564,7 +567,7 @@ plt.grid(True, linestyle="--", alpha=0.6)
 plt.legend(fontsize=12)
 plt.tight_layout()
 
-plt.savefig("CMT_project/Results/NDVI_predictions_Switzerland_precise_scale.png", dpi=300)
+plt.savefig("Results/NDVI_predictions_Switzerland_precise_scale.png", dpi=300)
 plt.show()
 
 print("Fixed-scale high-precision NDVI plot created.")
@@ -606,5 +609,6 @@ plt.grid(True, linestyle="--", alpha=0.6)
 plt.legend()
 plt.tight_layout()
 
-plt.savefig("CMT_project/Results/Global_pollution_scenarios_Switzerland.png", dpi=300)
+plt.savefig("Results/Global_pollution_scenarios_Switzerland.png", dpi=300)
 plt.show()
+
