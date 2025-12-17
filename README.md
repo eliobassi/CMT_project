@@ -82,12 +82,12 @@ High-precision NDVI sensitivity to NO2 :
 ### Report
 
 The template for the report is as following :
-- 1. Deviations from project proposal
-- 2. Introduction
-- 3. Approach used
-- 4. Results
-- 5. Conclusion
-- 6. Autorship statement
+  1. Deviations from project proposal
+  2. Introduction
+  3. Approach used
+  4. Results
+  5. Conclusion
+  6. Autorship statement
 
 ## Running the program
 
