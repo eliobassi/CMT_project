@@ -113,10 +113,10 @@ Bassi Elio, Saissi Emilie, Strazza Maxime
 
 ### Data sources
 
-- NDVI datasets from
-- Atmospheric pollution datasets from 'map.geo.admin.ch' (NO₂, O₃, SO₂, PM10)
-- CH4 datasets from
-- CO2 datsets from 
+- NDVI datasets from swissdatacube.org : https://doi.org/10.26037/yareta:kpmscrogqbdhvjeuev2ydrzk7y
+- Atmospheric pollution datasets from 'map.geo.admin.ch' (NO₂, O₃, SO₂, PM10) 
+- CH4 datasets from ourworldindata.org : https://ourworldindata.org/grapher/global-methane-concentrations
+- CO2 datsets from ourworldindata.org
 
 ### Code
 
