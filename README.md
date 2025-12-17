@@ -104,6 +104,14 @@ Required software :
 
 All scripts were tested using a Micromamba/Conda environment.
 
+Required Python packages:
+
+- **pandas**: A library for data manipulation and analysis.
+- **scipy**: A library for scientific and technical computing, including optimization.
+- **geopandas**: A library that extends Pandas to handle spatial data.
+- **rasterio**: A library for reading and writing geospatial raster data.
+- **scikit-learn**: A library for machine learning and data mining, including linear regression.
+
 ### Build
 
 Th C program is compiled using 'gcc file_name.c -Wall -lm -o a.out' and run using './a.out' via subprocess in the python code.
