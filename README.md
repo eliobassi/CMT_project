@@ -81,7 +81,13 @@ High-precision NDVI sensitivity to NO2 :
 
 ### Report
 
-Templates for .tex and .odt formats are provided in "docs/". The formatting can be changed, but the sections should remain the same. The final report should be placed in "docs/" as "report.pdf".
+The template for the report is as following :
+- Deviations from project proposal
+- Introduction
+- Approach used
+- Results
+- Conclusion
+- Autorship statement
 
 ## Running the program
 
@@ -89,7 +95,7 @@ Templates for .tex and .odt formats are provided in "docs/". The formatting can 
 
 The project is designed to run on Linux (SIE VDI compatible).
 
-Required software:
+Required software :
 
 - Python 3.11.9 ('lte')
 
