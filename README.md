@@ -27,6 +27,7 @@ The project relies on several categories of input data :
 Used to extract yearly mean pollution and NDVI values :
 
 - NDVI_YYYY.tif
+  These files are to heavy to be on Github, they have to be added manually to the data folder. They are accessible in the 'swissdatacube.org' website (see Data sources for the link).
 
 - NO2_YYYY.tif, O3_YYYY.tif, SO2_YYYY.tif, PM10_YYYY.tif
 
@@ -114,7 +115,7 @@ Required Python packages:
 
 ### Build
 
-Th C program is compiled using 'gcc file_name.c -Wall -lm -o a.out' and run using './a.out' via subprocess in the python code.
+Th C program is compiled using 'gcc file_name.c -Wall -lm' and run via subprocess in the python code.
 
 ### Execute
 
