@@ -118,7 +118,7 @@ Th C program is compiled using 'gcc file_name.c -Wall -lm -o a.out' and run usin
 
 ### Execute
 
-The program is executed by automatation in one line of code in a terminal running Bash (e.g., `matlab -batch src/myscript`), with the outputs generated to "Results/".
+The program is executed by running the main2.py file wich, by automation runs all the other files.
 
 ## Contributors
 
