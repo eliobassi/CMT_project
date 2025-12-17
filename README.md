@@ -122,9 +122,9 @@ Bassi Elio, Saissi Emilie, Strazza Maxime
 
 The scientific modeling choices, parameter definitions and standard scientific programming patterns (e.g. logistic growth formulation, linear regression usage, raster averaging) were implemented directly by us.
 
-Some parts of the project benefited from assistance by ChatGPT (OpenAI), including:
+Some parts of the project benefited from assistance by ChatGPT (OpenAI), including :
 
-Help with:
+Help with :
 
 - Code structuring and refactoring,
 
