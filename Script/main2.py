@@ -11,7 +11,7 @@ import subprocess
 import matplotlib.pyplot as plt
 from main import treatment
 
-
+# running the first part of the project 
 treatment()
 # -------------------------
 # SETTINGS
