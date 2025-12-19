@@ -460,7 +460,7 @@ def treatment():
     P = clean["Mean_NO2"].values
     log_r = clean["log_r"].values
 
-    # -------------import numpy as np---------------------------------------
+
     # Fit linear model log(r) = log(r0) - alpha * P
     # ----------------------------------------------------
     coef = np.polyfit(P, log_r, 1)
