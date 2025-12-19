@@ -524,7 +524,7 @@ plt.legend()
 plt.tight_layout()
 
 plt.savefig("Results/NDVI_predictions_Switzerland_adaptive_scale.png", dpi=300)
-plt.show()
+
 
 print("Adaptive-scale NDVI plot created.")
 
@@ -568,7 +568,7 @@ plt.legend(fontsize=12)
 plt.tight_layout()
 
 plt.savefig("Results/NDVI_predictions_Switzerland_precise_scale.png", dpi=300)
-plt.show()
+
 
 print("Fixed-scale high-precision NDVI plot created.")
 
