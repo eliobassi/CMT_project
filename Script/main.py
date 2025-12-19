@@ -440,7 +440,7 @@ def treatment():
 
     plt.tight_layout()
     plt.savefig("Results/Ouest_Lausanne_predictions.png")
-    plt.show()
+
 
     print(" Plot 'Future NDVI Predictions for Ouest Lausanne' created ")
     # ----------------------------------------------------
@@ -498,5 +498,5 @@ def treatment():
 
     plt.tight_layout()
     plt.savefig("Results/NDVI_sensitivity_to_NO2.png")
-    plt.show()
+  
     print(" Plot 'NDVI Sensitivity to NO₂\nlog(r) vs NO₂' created ")
